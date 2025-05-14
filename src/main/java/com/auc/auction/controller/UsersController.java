@@ -34,9 +34,7 @@ public class UsersController {
     @PostMapping
     public ResponseEntity<Void> addUser(@RequestBody Users user, UriComponentsBuilder ucb){
         Users savedUser = usersService.addUser(user);
-        log.info(savedUser.getId().toString());
         URI locationOfNewUser = ucb.path("/users/{id}").buildAndExpand(savedUser.getId()).toUri();
-        log.info(locationOfNewUser.getPath());
         return ResponseEntity.created(locationOfNewUser).build();
     }
     @DeleteMapping("/{id}")
